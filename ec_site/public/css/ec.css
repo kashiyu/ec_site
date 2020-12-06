@@ -1,0 +1,107 @@
+table, tr, th, td {
+    border: solid 1px;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    border-collapse:collapse;
+}
+h1 { 
+    color: orange;
+}
+
+img {
+
+    height:150;
+    width :auto; 
+
+}
+
+.false_sts{
+    background-color: #c0c0c0
+}
+
+section{
+    margin-top: 20px;
+    border-top: solid 1px;
+}
+label{
+    display: block;
+}
+
+.success_message{
+    color: royalblue;
+}
+.error_message{
+    color: red;
+}
+
+.content {
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 960px;
+}
+
+.stock_text{
+    width:60px;
+}
+/* header -------------------------------------------- */
+header {
+    height: 60px;
+    background-color:dimgray;
+}
+.header-box {
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 960px;
+}
+  
+.logo {
+    float: left;
+    display:block;
+    height:60px;
+    width :auto; 
+}
+.nemu {
+    float: right;
+    display:block;
+    margin: 15px 0 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+}
+.cart {
+    float: right;
+    display:block;
+    width:50px;
+    height:50px;
+    background:url("/img/cart.png")  no-repeat;
+}
+
+/* login page -------------------------------------------- */
+.login {
+    margin-top: 50px;
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 400px;
+}
+  
+.account-create {
+    margin-top: 30px;
+}
+  
+/* register page -------------------------------------------- */
+.register {
+    margin-top: 50px;
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 400px;
+}
+  
+.login-link {
+    margin-top: 30px;
+}
+
+/* user_management page -------------------------------------------- */
+.name_width {
+    width: 100px;
+}
