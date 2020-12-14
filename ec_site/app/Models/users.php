@@ -19,7 +19,7 @@ class users extends Model{
         return $login_user;
     }
 
-    //登録時同ユーザー名がいないか確認
+    //登録時、同ユーザー名がいないか確認
     public function registered_user($request){
         //requestから値を取得
         $user_name = $request->user_name;

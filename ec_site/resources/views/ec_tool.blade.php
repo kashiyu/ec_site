@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <htmL>
 <head>
-  <title>商品管理ページ</title>
-  <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
+    <meta charset="utf-8">
+    <title>商品管理ページ</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
 </head>
 <body>
     <header>
@@ -21,6 +23,11 @@
             {{ session('success_message') }}
         </p>
     @endif
+    @if (session('error_message'))
+        <p class="error_message">
+            {{ session('error_message') }}
+        </p>
+    @endif
     @foreach ($errors->all() as $error)
         <p class="error_message">{{ $error }}</p>
     @endforeach
@@ -35,7 +42,6 @@
         <label>ステータス<select name="status">
             <option value="1">公開</option>
             <option value="0">非公開</option>
-            <option value="2">不正</option>
         </select></label>
 
         <input type="submit" value="商品を登録する">
@@ -60,7 +66,7 @@
             class="false_sts"
         @endif >
         
-            <td><img src="/img/{{$value->img}}"></td>
+            <td><img class="item_img" src="/img/{{$value->img}}"></td>
             <td>{{$value->name}}</td>
             <td>{{$value->price}}円</td>
 
@@ -90,6 +96,7 @@
                     <input type="submit" value="削除する">
                     <input type="hidden" name='drink_id' value= {{$value->id}}>
                     @csrf
+                    @method('delete')
                 </form>
             </td>
         </tr>

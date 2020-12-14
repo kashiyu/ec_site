@@ -35,9 +35,12 @@ class ec_loginController extends Controller{
         session(['adm_flag'  => $login_user[0]->adm_flag]);
 
         //管理者権限があるか判断
-        if($login_user[0]->adm_flag === "1"){
+        $admin = '1';
+        if($login_user[0]->adm_flag === $admin){
+            //商品管理ページ（管理者権限あり）
             return redirect('/ec/tool');
         }else{
+            //ECトップページ（管理者権限なし）
             return redirect('/ec/store');
         }
     }

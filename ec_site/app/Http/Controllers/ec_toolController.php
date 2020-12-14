@@ -21,12 +21,17 @@ class ec_toolController extends Controller{
         $adm_flag = session('adm_flag');
 
         //ログイン済か判断
-        if(empty($user_id) === TRUE){
+        if(empty($user_id)){
             return redirect('/ec/login')->with('error_message', '不正なアクセスです。');
             exit;
+        }
+
+        
         //管理者権限(1)があるか判断
-        }else if($adm_flag !== "1"){
+        $admin = '1';
+        if($adm_flag !== $admin){
             return redirect('/ec/store');
+            exit;
         }
 
         //モデルへリクエスト
@@ -40,15 +45,41 @@ class ec_toolController extends Controller{
     //商品追加
     public function add_item(add_item_requests $request){ 
 
+        $errors = [];
+        $img = $request->img;
+
+        //ファイル関係の変数初期化 
+        $img_dir = public_path('img/');
+        //$img_dir = \Config::get('fpath.img_dir');
+        $new_img_filename = '';   
+
+        // 画像の拡張子を取得
+        $extension = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+        // 指定の拡張子であるかどうかチェック
+        if ($extension === 'jpg' || $extension === 'jpeg' || $extension === 'png') {
+            // 保存する新しいファイル名の生成（ユニークな値を設定する）
+            $new_img_filename = sha1(uniqid(mt_rand(), true)). '.' . $extension; 
+
+            // 同名ファイルが存在するかどうかチェック
+            if (is_file($img_dir . $new_img_filename) !== TRUE) {
+                // アップロードされたファイルを指定ディレクトリに移動して保存
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $img_dir . $new_img_filename) !== TRUE) {
+                    return redirect('/ec/tool')->with('error_message', 'ファイルアップロードに失敗しました');
+                    exit;
+                }
+            } else {
+                return redirect('/ec/tool')->with('error_message', 'ファイルアップロードに失敗しました。再度お試しください。');
+                exit;
+            }
+        } else {
+            return redirect('/ec/tool')->with('error_message', 'ファイル形式が異なります。画像ファイルはJPEG又はPNGのみ利用可能です。');
+            exit;
+        }
         //モデルへリクエスト
         $item = new item();
-        $errors = $item->add_item_model($request);
+        $errors = $item->add_item_model($request,$new_img_filename);
 
-        if(empty($errors) === true){
-            return redirect('/ec/tool')->with('success_message', '追加しました');
-        }else{
-            return redirect('/ec/tool')->with($errors);
-        }
+        return redirect('/ec/tool')->with('success_message', '追加しました');
     }
     
     //商品削除
@@ -93,9 +124,11 @@ class ec_toolController extends Controller{
         if(empty($user_id) === TRUE){
             return redirect('/ec/login')->with('error_message', '不正なアクセスです。');
             exit;
+        }
         //管理者権限(1)があるか判断
-        }else if($adm_flag !== "1"){
+        if($adm_flag !== "1"){
             return redirect('/ec/store');
+            exit;
         }
 
         //ユーザー一覧取得
@@ -139,6 +172,7 @@ class ec_toolController extends Controller{
             return redirect('/ec/logout');
             exit;
         }
+
         return redirect('/ec/tool/admin')->with('success_message', 'ユーザーを削除しました');
     }
     

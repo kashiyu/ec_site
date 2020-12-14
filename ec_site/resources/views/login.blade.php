@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
@@ -7,7 +8,7 @@
 <body>
     <header>
         <div class="header-box">
-            <a href="">
+            <a href="/ec/login">
                 <img class="logo" img src="/img/logo.png" alt="EC_logo">
             </a>
         </div>
