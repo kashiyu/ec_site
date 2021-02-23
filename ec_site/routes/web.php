@@ -83,3 +83,4 @@ Route::post('/ec/store/cart/chz_amount', [ec_storeController::class, 'change_amo
 //カート内のアイテムの数量を変更
 Route::post('/ec/store/cart/buy', [ec_storeController::class, 'buy_item']);
 
+

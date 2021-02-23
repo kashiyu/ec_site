@@ -15,10 +15,10 @@ class item extends Model{
     //use HasFactory;
     public function items(){
 
-        //アイテム一覧select文
-        $item = DB::select("SELECT item.id, img, name, price, stock, status 
-        FROM item JOIN stock
-        ON Item.id = stock.item_id");
+        //アイテム一覧取得
+        $item = DB::table('item')
+            ->leftJoin('stock', 'item.id', '=', 'stock.item_id')
+            ->get();
 
         return $item;
     }
@@ -91,5 +91,18 @@ class item extends Model{
         $item_id = $request->item_id;
         //在庫数変更アップデート文
         DB::update("update stock set stock = '$stock' where item_id = $item_id");
+    }
+
+
+    //ECトップページ用全アイテム取得
+    public function store_items(){
+
+        //アイテム一覧select文
+        $items = DB::select("SELECT item.id, img, name, price, stock 
+        FROM item JOIN stock
+        ON Item.id = stock.item_id
+        WHERE status = '1'");
+
+        return $items;
     }
 }

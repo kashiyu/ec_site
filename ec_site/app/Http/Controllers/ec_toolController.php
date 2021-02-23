@@ -26,10 +26,8 @@ class ec_toolController extends Controller{
             exit;
         }
 
-        
         //管理者権限(1)があるか判断
-        $admin = '1';
-        if($adm_flag !== $admin){
+        if(!(bool) $adm_flag){
             return redirect('/ec/store');
             exit;
         }
@@ -38,14 +36,14 @@ class ec_toolController extends Controller{
         $item = new item();
         $items = $item->items();
 
-        return view('ec_tool',
-        ['item' => $items],
-        ['user_name' => $user_name],);
+        return view('ec_tool',[
+            'item' => $items,
+            'user_name' => $user_name
+        ]);
     } 
     //商品追加
     public function add_item(add_item_requests $request){ 
 
-        $errors = [];
         $img = $request->img;
 
         //ファイル関係の変数初期化 
@@ -121,12 +119,12 @@ class ec_toolController extends Controller{
         $adm_flag = session('adm_flag');
 
         //ログイン済か判断
-        if(empty($user_id) === TRUE){
+        if(empty($user_id)){
             return redirect('/ec/login')->with('error_message', '不正なアクセスです。');
             exit;
         }
         //管理者権限(1)があるか判断
-        if($adm_flag !== "1"){
+        if(!(bool) $adm_flag){
             return redirect('/ec/store');
             exit;
         }
@@ -148,6 +146,8 @@ class ec_toolController extends Controller{
         list($user_id, $adm_flag) = $user->change_adm_flag($request);
 
         $login_user_id = session('user_id');
+
+        log::debug($request);
 
         //ログインユーザーの管理者権限をなしにした場合
         if($login_user_id == $user_id && $adm_flag == 0){

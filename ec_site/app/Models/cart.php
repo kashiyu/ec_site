@@ -75,7 +75,7 @@ class cart extends Model{
         DB::beginTransaction();
         try {
 
-            ////在庫数を購入数分減らす
+            //在庫数を購入数分減らす
             foreach($carts as $value){
                 $item_id = $value->id;
                 $amount = $value->amount;

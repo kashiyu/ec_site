@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>ログインページ</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
-</head>
-<body>
-    <header>
-        <div class="header-box">
-            <a href="/ec/login">
-                <img class="logo" img src="/img/logo.png" alt="EC_logo">
-            </a>
-        </div>
-    </header>
+@extends('layout.login_header')
+@section('title','ログインページ')
+@section('main_content')
 
     <div class="content">
         <div class="login">
@@ -27,21 +15,12 @@
             </div>
         </div>
 
-        @if (session('error_message'))
-            <p class="error_message">
-                {{ session('error_message') }}
-            </p>
-        @endif
-        @foreach ($errors->all() as $error)
-                <p class="error_message">{{ $error }}</p>
-        @endforeach
-        @if (session('success_message'))
-            <p class="success_message">
-                {{ session('success_message') }}
-            </p>
-        @endif
+        @include('layout.message')
+        @parent
+
     </div>
 
+    <?php phpinfo();
+    ?>
 
-</body>
-</html>
+@endsection

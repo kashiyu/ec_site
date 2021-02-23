@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\item_store;
+use App\Models\item;
 use App\Models\cart;
 use Illuminate\Support\Facades\Log;
 
@@ -19,14 +19,14 @@ class ec_storeController extends Controller{
         
 
         //ログイン済か判断
-        if(empty($user_id) === TRUE){
+        if(empty($user_id)){
             return redirect('/ec/login')->with('error_message', '不正なアクセスです。');
             exit;
         }
 
         //モデルへリクエスト
-        $item = new item_store();
-        $items = $item->items();
+        $item = new item();
+        $items = $item->store_items();
 
 
         return view('ec_store',[
@@ -48,7 +48,7 @@ class ec_storeController extends Controller{
         session()->forget('error_array');
 
         //ログイン済か判断
-        if(empty($user_id) === TRUE){
+        if(empty($user_id)){
             return redirect('/ec/login')->with('error_message', '不正なアクセスです。');
             exit;
         }
@@ -131,23 +131,23 @@ class ec_storeController extends Controller{
         }
 
 
-        $errors_array = [];
+        $error_array = [];
         foreach($carts as $value){
             //カートの中身の商品が非公開になっていないか確認
             $public = '1';
             if($value->status !== $public){
-                $errors_array[] = $value->name.'が非公開です';
+                $error_array[] = $value->name.'が非公開です';
             }
 
             //購入する数量が在庫数内であるか確認
             if($value->amount > $value->stock){ 
-               $errors_array[] = $value->name.'の在庫が足りません';
+               $error_array[] = $value->name.'の在庫が足りません';
             }
         }
 
         //購入する商品に不備（非公開or在庫不足）
-        if(!empty($errors_array)){
-            session(['error_array'=> $errors_array]);
+        if(!empty($error_array)){
+            session(['error_array'=> $error_array]);
             return redirect('/ec/store/cart');
         }
 

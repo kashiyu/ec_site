@@ -1,51 +1,11 @@
-<!DOCTYPE html>
-<htmL>
-<head>
-    <meta charset="utf-8">
-    <title>買い物カゴ</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
-</head>
-<body>
-    <header>
-        <div class="header-box">
-            <a href="/ec/store">
-                <img class="logo" src="/img/logo.png" alt="EC_logo">
-            </a>
-            <a class="cart" href="/ec/store/cart"></a>
-            <a class="nemu" href="/ec/logout">ログアウト</a>
-            @if($adm_flag === "1")
-                <a class="nemu" href="/ec/tool">管理ページ</a>
-            @endif
-            <p class="nemu">ユーザー名：{{$user_name}}</p>
-        </div>
-    </header>
+@extends('layout.header')
+@section('title','買い物カゴ')
+@section('main_content')
 
     <div class="content">
-        <h1 class="title">ショッピングカート</h1>
-            
-        @if (session('success_message'))
-            <p class="success_message">
-                {{ session('success_message') }}
-            </p>
-        @endif
-        @if (session('error_message'))
-            <p class="error_message">
-                {{ session('error_message') }}
-            </p>
-        @endif
+    @include('layout.message')
+    @parent
 
-        @if (!empty($error_array))
-            @foreach($error_array as $error)
-            <p class="error_message">
-                {{$error}}
-            </p>
-            @endforeach
-        @endif
-
-        @foreach ($errors->all() as $error)
-            <p class="error_message">{{ $error }}</p>
-        @endforeach
-        
         <div class="cart-list-title">
             <span class="cart-list-price">価格</span>
             <span class="cart-list-num">数量</span>
@@ -89,5 +49,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+@endsection

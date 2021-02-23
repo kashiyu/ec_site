@@ -5,16 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class users extends Model{
     //use HasFactory;
     public function login_user($request){
+
         //requestから値を取得
         $user_name = $request->user_name;
         $password = $request->password;
+        $login_user = "";
 
-        //ユーザーが登録されているか確認
-        $login_user = DB::select("SELECT id,user_name,adm_flag FROM user WHERE user_name='$user_name' AND password='$password'");
+        //ハッシュ化されたパスワードを取得
+        $user_password = DB::select("SELECT password FROM user WHERE user_name='$user_name'");        
+        $hash_password = $user_password[0]->password;
+
+        if (Hash::check($password, $hash_password)) {
+            //ユーザー名、パスワードが正しければ取得
+            $login_user = DB::select("SELECT id,user_name,adm_flag FROM user WHERE user_name='$user_name' AND password='$hash_password'");
+            
+        }
 
         return $login_user;
     }
@@ -34,10 +45,11 @@ class users extends Model{
     public function register($request){
         //requestから値を取得
         $user_name = $request->user_name;
-        $password = $request->password;
+        //$password = $request->password;
+        $password = Hash::make($request->password);
 
         //ユーザー登録
-        DB::insert("INSERT INTO user(user_name, password, adm_flag)value('$user_name','$password',0)");
+        DB::insert("INSERT INTO user(user_name, password, adm_flag)value('$user_name','$password','0')");
     }
 
     //ユーザー管理ページ全ユーザー取得
@@ -56,7 +68,7 @@ class users extends Model{
         $adm_flag = $request->adm_flag;
 
         //管理者権限変更
-        DB::update("UPDATE user SET adm_flag = $adm_flag WHERE id = $user_id");
+        DB::update("UPDATE user SET adm_flag = '$adm_flag' WHERE id = $user_id");
         
         return [$user_id, $adm_flag];
     }

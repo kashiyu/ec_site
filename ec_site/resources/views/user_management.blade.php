@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>ユーザ管理ページ</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
-</head>
-<body>
-    <header>
-        <div class="header-box">
-            <a href="/ec/store">
-                <img class="logo" src="/img/logo.png" alt="EC_logo">
-            </a>
-            <a class="nemu" href="/ec/logout">ログアウト</a>
-            <a class="nemu" href="/ec/tool">商品管理ページ</a>
-            <p class="nemu">ユーザー名：{{$user_name}}</p>
-        </div>
-    </header>
-
-    <h1>ユーザー管理ページ</h1>
-    @if (session('success_message'))
-        <p class="success_message">
-            {{ session('success_message') }}
-        </p>
-    @endif
-    @foreach ($errors->all() as $error)
-        <p class="error_message">{{ $error }}</p>
-    @endforeach
+@extends('layout.tool_header')
+@section('title','ユーザー管理ページ')
+@section('sub_title','ユーザー管理ページ')
+@section('href','/ec/tool')
+@section('href_title','商品管理ページ')
+@section('main_content')
+@include('layout.message')
+@parent
 
     <section>
         <h2>ユーザ情報一覧</h2>
@@ -68,5 +48,4 @@
             
         </table>
     </section>
-</body>
-</html>
+@endsection

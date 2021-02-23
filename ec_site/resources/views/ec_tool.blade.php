@@ -1,53 +1,29 @@
-<!DOCTYPE html>
-<htmL>
-<head>
-    <meta charset="utf-8">
-    <title>商品管理ページ</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/ec.css')}}">
-</head>
-<body>
-    <header>
-        <div class="header-box">
-            <a href="/ec/store">
-                <img class="logo" src="/img/logo.png" alt="EC_logo">
-            </a>
-            <a class="nemu" href="/ec/logout">ログアウト</a>
-            <a class="nemu" href="/ec/tool/admin">ユーザ管理ページ</a>
-            <p class="nemu">ユーザー名：{{$user_name}}</p>
-        </div>
-    </header>
+@extends('layout.tool_header')
+@section('title','商品管理ページ')
+@section('sub_title','EC 管理ページ')
+@section('href','/ec/tool/admin')
+@section('href_title','ユーザ管理ページ')
+@section('main_content')
+@include('layout.message')
+@parent
 
-    <h1>EC 管理ページ</h1>
-    @if (session('success_message'))
-        <p class="success_message">
-            {{ session('success_message') }}
-        </p>
-    @endif
-    @if (session('error_message'))
-        <p class="error_message">
-            {{ session('error_message') }}
-        </p>
-    @endif
-    @foreach ($errors->all() as $error)
-        <p class="error_message">{{ $error }}</p>
-    @endforeach
 
-  <section>
+    <section>
     <h2>商品の登録</h2>
-    <form action="/ec/tool/add" method="post" enctype="multipart/form-data">
-        <label>商品名<input type="text" name="name"></label>
-        <label>値段<input type="text" name="price" maxlength="8"></label>
-        <label>個数<input type="text" name="stock" maxlength="8"></label>
-        <label>商品画像<input type="file" name="img"></label>
-        <label>ステータス<select name="status">
-            <option value="1">公開</option>
-            <option value="0">非公開</option>
-        </select></label>
+        <form action="/ec/tool/add" method="post" enctype="multipart/form-data">
+            <label>商品名<input type="text" name="name"></label>
+            <label>値段<input type="text" name="price" maxlength="8"></label>
+            <label>個数<input type="text" name="stock" maxlength="8"></label>
+            <label>商品画像<input type="file" name="img"></label>
+            <label>ステータス<select name="status">
+                <option value="1">公開</option>
+                <option value="0">非公開</option>
+            </select></label>
 
-        <input type="submit" value="商品を登録する">
-        @csrf 
-    </form>
-  </section>
+            <input type="submit" value="商品を登録する">
+            @csrf 
+        </form>
+    </section>
 
     <section>
         <h2>商品情報の一覧・変更</h2>
@@ -103,6 +79,5 @@
         @endforeach
         </table>
     </section>
-</body>
-</html>
+@endsection
 

@@ -25,7 +25,7 @@ class ec_loginController extends Controller{
         $login_user = $user->login_user($request);
 
         //取得できたか判断
-        if(empty($login_user) === TRUE){
+        if(empty($login_user)){
             return redirect('/ec/login')->with('error_message', 'ユーザー名又はパスワードが違います。');
             exit;
         }
@@ -34,9 +34,8 @@ class ec_loginController extends Controller{
         session(['user_name' => $login_user[0]->user_name]);
         session(['adm_flag'  => $login_user[0]->adm_flag]);
 
-        //管理者権限があるか判断
-        $admin = '1';
-        if($login_user[0]->adm_flag === $admin){
+        //管理者権限（adm_flagが1）があるか判断
+        if((bool) $login_user[0]->adm_flag){
             //商品管理ページ（管理者権限あり）
             return redirect('/ec/tool');
         }else{
@@ -65,10 +64,10 @@ class ec_loginController extends Controller{
 
         //インスタンス化
         $user = new users();
-        //入力したユーザーが存在するなら取得
+        //入力したユーザー名が存在するなら取得
         $registered_user = $user->registered_user($request);
 
-        if(empty($registered_user) !== TRUE){
+        if(!empty($registered_user)){
             return redirect('/ec/register')->with('error_message', '同じユーザー名が既に登録されています');
         }
 
