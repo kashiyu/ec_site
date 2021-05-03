@@ -54,7 +54,7 @@ class item extends Model{
 
         //削除する画像ファイル名取得
         $img = DB::select("SELECT img FROM item WHERE id = $drink_id");
-        $img = $img[0]->img;
+        $img = @$img[0]->img;
         //画像ファイル削除
         File::delete('../public/img/' . $img);
 

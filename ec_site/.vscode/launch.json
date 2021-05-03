@@ -10,7 +10,7 @@
             "request": "launch",
             "port": 9000,
             "pathMappings": {
-                "/Users/kashiwano/Desktop/ec_site": "${workspaceRoot}"
+                "/Users/kashiwano/demo/ec_site": "${workspaceRoot}"
             }
         },
         {
