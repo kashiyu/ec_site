@@ -17,10 +17,6 @@
 
         @include('layout.message')
         @parent
-
     </div>
-
-    <?php phpinfo();
-    ?>
 
 @endsection
