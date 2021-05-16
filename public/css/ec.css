@@ -1,0 +1,268 @@
+table, tr, th, td {
+    border: solid 1px;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    border-collapse:collapse;
+}
+h1 { 
+    color: orange;
+}
+
+.item_img {
+
+    height:150px;
+    width :auto; 
+
+}
+
+.false_sts{
+    background-color: #c0c0c0
+}
+
+section{
+    margin-top: 20px;
+    border-top: solid 1px;
+}
+label{
+    display: block;
+}
+
+.success_message{
+    color: royalblue;
+}
+.error_message{
+    color: red;
+}
+
+.content {
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 960px;
+}
+
+.stock_text{
+    width:60px;
+}
+/* header -------------------------------------------- */
+header {
+    height: 60px;
+    background-color:dimgray;
+}
+.header-box {
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 960px;
+}
+  
+.logo {
+    float: left;
+    display:block;
+    height:60px;
+    width :auto; 
+}
+.nemu {
+    float: right;
+    display:block;
+    margin: 15px 0 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+}
+.cart {
+    float: right;
+    display:block;
+    width:50px;
+    height:50px;
+    background:url("/img/cart.png")  no-repeat;
+}
+
+/* login page -------------------------------------------- */
+.login {
+    margin-top: 50px;
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 400px;
+}
+  
+.account-create {
+    margin-top: 30px;
+}
+  
+/* register page -------------------------------------------- */
+.register {
+    margin-top: 50px;
+    margin-left : auto ;
+    margin-right : auto ;
+    width: 400px;
+}
+  
+.login-link {
+    margin-top: 30px;
+}
+
+/* user_management page -------------------------------------------- */
+.name_width {
+    width: 100px;
+}
+
+/* ec_store page -------------------------------------------- */
+ul {
+    list-style:none;
+}
+.item-list li {
+    float:left;
+    margin-top: 20px;
+    margin-left: 20px;
+    width:300px;
+}
+  
+.item-list .item {
+    text-align: center;
+}
+  
+.item-list{
+    width:300px;
+}
+  
+.item-list .item-info{
+    margin-top: 5px;
+}
+  
+.item-list .item-name {
+    float:left;
+}
+  
+.item-list .item-price {
+    display:block;
+    float:right;
+}
+  
+.item-list .cart-btn {
+    display:block;
+    clear:both;
+    margin:0 auto;
+    width:160px;
+    height:40px;
+    color: #ffffff;
+    font-size: 100%;
+    background-color: #00A7F7;
+    border:none;
+}
+  
+.item-list .sold-out{
+    clear:both;
+    height:40px;
+    color: #FF0000;
+    font-size: 1.2em;
+}
+
+/* cart, finish page -------------------------------------------- */
+
+.title {
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.cart-list-title {
+    clear:both;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-list-title .cart-list-price{
+    margin-left: 700px;
+}
+
+.cart-list-title .cart-list-num {
+    margin-left: 150px;
+}
+
+.cart-list .cart-item {
+    clear:both;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-list .cart-item-img{
+    width:120px;
+}
+
+.cart-list .cart-item-name{
+    position: absolute;
+    margin-left: 30px;
+    width: 500px;
+}
+
+.cart-item-del{
+    display: inline;
+    position: absolute;
+    margin-left: 470px;
+}
+
+.cart-list .cart-item-price {
+    position: absolute;
+    margin-left: 560px;
+    color: #FF0000;
+}
+
+.cart-list .form_select_amount {
+    float:right;
+    margin-left: 50px;
+}
+
+.cart-list .cart-item-num {
+    width:100px;
+    height:30px;
+    font-size: 1.2em;
+}
+
+.cart-list .cart-item-num2 {
+    width: 50px;
+}
+
+.buy-sum-box{
+    clear:both;
+    margin-top: 10px;
+}
+
+.buy-sum-box .buy-sum-title{
+    margin-left: 620px;
+}
+
+.buy-sum-box .buy-sum-price{
+    margin-left: 30px;
+    font-size: 2em;
+    color: #FF0000;
+}
+
+.buy-btn {
+    display:block;
+    margin-top: 10px;
+    width:100%;
+    height:60px;
+    color: #ffffff;
+    background-color: #FF8A00;
+    font-size: 1.4em;
+    border:none;
+}
+  
+  /* finish page -------------------------------------------- */
+  
+.finish-msg{
+    margin-top: 20px;
+    height:60px;
+    font-size: 1.4em;
+    text-align: center;
+    line-height:60px;
+    background-color: #FFF2DC;
+}
+  
+.finish-item-price {
+    position: absolute;
+    margin-left: 800px;
+}
